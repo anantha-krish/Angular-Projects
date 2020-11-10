@@ -1,0 +1,38 @@
+<!-- // String Interpolation-> data is converted to string  using {{data}} -->
+<div>
+  Hi this is server no: {{ serveNum }} now
+  {{ isOffline ? "Offline" : "Online" }}
+</div>
+
+<!-- //property binding -> [attribute] = "data" -->
+<div>
+  <button class="btn-primary" [disabled]="isOffline">Add Server</button>
+</div>
+
+<!-- //event binding -> (eventType) = "function()" -->
+<button class="btn-primary" (click)="onCreateServer()">Create Server</button>
+<p
+  [ngClass]="{ online: isServerCreated }"
+  *ngIf="isServerCreated; else noServer"
+>
+  {{ serverCreationStatus }}
+</p>
+<ng-template #noServer>
+  <p class="offline">No server was created !!</p>
+</ng-template>
+
+<!-- // One -way binding event binding with passing event -> (eventType) = "function($event)" -->
+<div>
+  <label for="one-way-input">One way Input</label>
+  <input id="one-way-input" type="text" (input)="onUpdateServerName($event)" />
+</div>
+
+<!-- //Two way binding by using directive-> [(ngModel)] = "data" -->
+<div>
+  <label for="two-way-input">Two way Input</label>
+  <input id="two-way-input" type="text" [(ngModel)]="serverName" />
+</div>
+
+Ouptut: {{ serverName }}
+
+<p *ngFor="let server of servers">Server added: {{ server }}</p>
